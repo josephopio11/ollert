@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 // import localFont from "next/font/local";
+import { siteConfig } from "@/config/site";
 import "./globals.css";
 
 // const geistSans = localFont({
@@ -20,8 +21,19 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Ollert",
-  description: "Task management app",
+  title: {
+    default: siteConfig.name,
+    template: `%s - ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  icons: [
+    {
+      url: "/myLogo.svg",
+      href: "/myLogo.svg",
+      type: "image/svg+xml",
+      sizes: "any",
+    },
+  ],
 };
 
 export default function RootLayout({

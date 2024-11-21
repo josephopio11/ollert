@@ -21,7 +21,7 @@ export default function MarketingPage() {
         Collaborate, manage projects, and reach new productivity peaks. From
         agile sprints to internal projects, get more done with Ollert.
       </div>
-      <Button className="mt-6 " size={"lg"}>
+      <Button className="mt-6 " size={"lg"} asChild>
         <Link href="/sign-up">Get started for free</Link>
       </Button>
     </div>
