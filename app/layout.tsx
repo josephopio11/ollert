@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 // import localFont from "next/font/local";
 import { siteConfig } from "@/config/site";
+import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 
 // const geistSans = localFont({
@@ -42,13 +43,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${poppins.className} antialiased`}
-        // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body
+          className={`${poppins.className} antialiased`}
+          // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
