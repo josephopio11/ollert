@@ -21,6 +21,9 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar";
+import { useOrganization, useOrganizationList } from "@clerk/nextjs";
+import { useLocalStorage } from "usehooks-ts";
+import { Skeleton } from "../ui/skeleton";
 import { BackMenu } from "./back-menu";
 import { BackProjects } from "./back-projects";
 import { BackUser } from "./back-user";
@@ -156,13 +159,57 @@ const data = {
   ],
 };
 
+interface SidebarProps extends React.ComponentProps<typeof Sidebar> {
+  storageKey?: string;
+}
+
 export function BackSidebar({
+  storageKey = "t-sidebar-state",
   ...props
-}: React.ComponentProps<typeof Sidebar>) {
+}: SidebarProps) {
+  const [expanded, setExpanded] = useLocalStorage<Record<string, unknown>>(
+    storageKey,
+    {}
+  );
+  const { organization: activeOrganization, isLoaded: isLoadedOrg } =
+    useOrganization();
+
+  const { userMemberships, isLoaded: isLoadedOrgList } = useOrganizationList({
+    userMemberships: { infinite: true },
+  });
+
+  const defaultAccordionValue: string[] = Object.keys(expanded).reduce(
+    (acc: string[], key: string) => {
+      if (expanded[key]) acc.push(key);
+      return acc;
+    },
+    []
+  );
+
+  const onExpand = (organisationId: string) => {
+    setExpanded((curr) => ({
+      ...curr,
+      [organisationId]: !curr[organisationId],
+    }));
+  };
+
+  if (!isLoadedOrgList || !isLoadedOrg || userMemberships.isLoading) {
+    return (
+      <>
+        <Skeleton />
+      </>
+    );
+  }
+
+  console.log(userMemberships);
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
+        <TeamSwitcher
+          teams={userMemberships.data}
+          activeTeamId={activeOrganization?.id}
+        />
       </SidebarHeader>
       <SidebarContent>
         <BackMenu items={data.navMain} />

@@ -19,15 +19,41 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
-export function TeamSwitcher({
-  teams,
-}: {
+interface TeamSwitcherProps {
+  activeTeamId?: string;
   teams: {
-    name: string;
-    logo: React.ElementType;
-    plan: string;
+    id: string;
+    pathRoot: string;
+    publicMetadata: {
+      firstName: string;
+      lastName: string;
+      imageUrl: string;
+      hasImage: boolean;
+      identifier: string;
+      userId: string;
+    };
+    organization: {
+      id: string;
+      pathRoot: string;
+      name: string;
+      slug: string;
+      imageUrl: string;
+      hasImage: boolean;
+      adminDeleteEnabled: boolean;
+      createdAt: Date;
+      updatedAt: Date;
+      membersCount: number;
+      pendingInvitationsCount: number;
+      maxAllowedMemberships: number;
+    };
+    permissions: string[];
+    role: string;
+    createdAt: Date;
+    updatedAt: Date;
   }[];
-}) {
+}
+
+export function TeamSwitcher({ teams }: TeamSwitcherProps) {
   const { isMobile } = useSidebar();
   const [activeTeam, setActiveTeam] = React.useState(teams[0]);
 

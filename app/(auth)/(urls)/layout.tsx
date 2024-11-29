@@ -14,9 +14,9 @@ const AuthLayout = ({ children }: AuthLayoutProps) => {
           <Image
             src="/auth.jpg"
             alt="Authentication background"
-            layout="fill"
-            objectFit="cover"
-            priority
+            width={1920}
+            height={1080}
+            className="absolute h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center flex-col space-y-4 justify-center p-10">
             <Image src="/myLogo.svg" alt="Ollert Logo" width={50} height={50} />

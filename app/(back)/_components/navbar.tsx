@@ -1,12 +1,18 @@
 import SiteLogo from "@/components/shared/logo";
 import { Button } from "@/components/ui/button";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
+import { Separator } from "@radix-ui/react-separator";
 import { Plus } from "lucide-react";
 
 const Navbar = () => {
   return (
     <nav className="fixed z-50 top-0 w-full h-14 border-b shadow-sm bg-white flex items-center px-4">
       <div className="flex items-center gap-x-4">
+        <div className="flex items-center gap-2 px-4">
+          <SidebarTrigger className="-ml-1" />
+          <Separator orientation="vertical" className="mr-2 h-4" />
+        </div>
         <div className="hidden md:flex">
           <SiteLogo />
         </div>
