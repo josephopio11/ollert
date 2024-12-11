@@ -22,7 +22,7 @@ export default function MarketingPage() {
         agile sprints to internal projects, get more done with Ollert.
       </div>
       <Button className="mt-6 " size={"lg"} asChild>
-        <Link href="/sign-up">Get started for free</Link>
+        <Link href="/register">Get started for free</Link>
       </Button>
     </div>
   );

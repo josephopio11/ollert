@@ -27,7 +27,6 @@ import { Skeleton } from "../ui/skeleton";
 import { BackMenu } from "./back-menu";
 import { BackProjects } from "./back-projects";
 import { BackUser } from "./back-user";
-import { TeamSwitcher } from "./team-switcher";
 
 // This is sample data.
 const data = {
@@ -206,10 +205,11 @@ export function BackSidebar({
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <TeamSwitcher
+        {/* <TeamSwitcher
           teams={userMemberships.data}
           activeTeamId={activeOrganization?.id}
-        />
+        /> */}
+        {/* <SiteLogo /> */}
       </SidebarHeader>
       <SidebarContent>
         <BackMenu items={data.navMain} />
